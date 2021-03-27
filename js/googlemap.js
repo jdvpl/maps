@@ -36,15 +36,12 @@ function showAllColleges(allData) {
 
     content.appendChild(img);
 
-    if (data.estado === "PENDIENTEa") {
-      var icon = {
-        url:
-          "http://www.developerdrive.com/wp-content/uploads/2013/08/ddrive.png",
-      };
+    if (data.estado === "OK") {
+      var icon = "./img/ok.png";
+    } else if (data.estado === "PENDIENTE") {
+      var icon = "./img/pendiente.png";
     } else {
-      var icon = {
-        url: "https://i.ibb.co/DbxtxSm/school-1.png",
-      };
+      var icon = "./img/no.png";
     }
 
     // aca pinta los que estan en la base de datos

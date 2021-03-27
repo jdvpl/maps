@@ -10,6 +10,7 @@ $sql = "SELECT DISTINCT
 $result = mysqli_query($conexion, $sql);
 $cadena = "
 			<select id='municipio' name='municipio'>";
+$cadena = $cadena . '<option value="">Seleccione</option>';
 while ($ver = mysqli_fetch_row($result)) {
 	$cadena = $cadena . '<option value=' . $ver[0] . ' id=' . $ver[0] . '>' . ($ver[0]) . '</option>';
 }

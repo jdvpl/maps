@@ -19,7 +19,7 @@ function cargar() {
 function loadMap() {
   var bogota = { lat: 4.6717166, lng: -74.0954029 };
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6,
+    zoom: 11,
     center: bogota,
   });
 
