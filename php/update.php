@@ -1,3 +1,7 @@
+<?php
+require_once '../education.php';
+$edus = new education;
+?>
 <!DOCTYPE html>
 <html>
 
@@ -5,22 +9,7 @@
     <title>Access Google Maps API in PHP</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-
-
-    <style type="text/css">
-    #map {
-        width: 100%;
-        height: 100%;
-        border: 1px solid blue;
-        height: 650px;
-    }
-
-    #data,
-    #allData {
-        /* display: none; */
-    }
-    </style>
+    <script src="https://kit.fontawesome.com/5933801b0a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,27 +30,55 @@
             </nav>
         </div>
 
-        <!-- INICIA EL ROW DE LSO SELECTS -->
 
 
 
 
         <div class="tabla mt-3">
-            <table class="table table-responsive table-hover table-striped">
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Sede</th>
-                        <th scope="col">Institucion</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Ciudad</th>
+                        <th scope="col">Sede</th>
+                        <th scope="col">Institucion</th>
+                        <th scope="col">Dane</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Region</th>
                         <th scope="col">Formacion</th>
+                        <th scope="col">Region</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
+                    <?php
+                    $todo = $edus->getAllColleges();
+                    $i = 1;
+                    foreach ($todo as $v) { ?>
+                    <tr>
+                        <td><?php echo $i ?></td>
+                        <td><?php echo $v['departamento']; ?></td>
+                        <td><?php echo $v['municipio']; ?></td>
+                        <td><?php echo $v['sede']; ?></td>
+                        <td><?php echo $v['institucion_educativa']; ?></td>
+                        <td><?php echo $v['dane_institucion']; ?></td>
+                        <td><?php echo $v['estado']; ?></td>
+                        <td><?php echo $v['formacion']; ?></td>
+                        <td><?php echo $v['region']; ?></td>
+                        <td>
+                            <a href="<?php echo $v['id']; ?>"><i class="fas fa-trash text-danger"></i></a>
+                            <a href="<?php echo $v['id']; ?>"><i class="fas fa-pen pl-2 text-success"></i></a>
+
+                        </td>
+
+                    </tr>
+                    <?php
+                        $i = $i + 1;
+                    } ?>
+
+
+                    </tr>
                 </tbody>
             </table>
         </div>

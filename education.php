@@ -153,7 +153,7 @@ class education
 	public function getAllColleges()
 	{
 		// $sql = "SELECT * FROM $this->tableName WHERE departamento =:departamento";
-		$sql = "SELECT * FROM $this->tableName  WHERE departamento = 'GUAVIARE' LIMIT 2";
+		$sql = "SELECT * FROM $this->tableName";
 		// $sql = "SELECT * FROM $this->tableName  WHERE departamento = 'HUILA'";
 		// $sql = "SELECT * FROM $this->tableName";
 		$stmt = $this->conn->prepare($sql);
