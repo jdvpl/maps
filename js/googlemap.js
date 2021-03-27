@@ -1,35 +1,4 @@
 var map;
-var geocoder;
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(mostrarUbicacion);
-}
-
-function mostrarUbicacion(ubicacion) {
-  var longi = ubicacion.coords.longitude;
-  var lati = ubicacion.coords.latitude;
-  console.log(`longitud: ${longi} | latitud: ${lati}`);
-}
-
-function loadMap() {
-  var bogota = { lat: 4.6717166, lng: -74.0954029 };
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 7,
-    center: bogota,
-  });
-
-  var marker = new google.maps.Marker({
-    position: bogota,
-    map: map,
-  });
-
-  var cdata = JSON.parse(document.getElementById("data").innerHTML);
-  geocoder = new google.maps.Geocoder();
-  // codeAddress(cdata);
-
-  var allData = JSON.parse(document.getElementById("allData").innerHTML);
-  showAllColleges(allData);
-}
 
 function showAllColleges(allData) {
   var infoWind = new google.maps.InfoWindow();
@@ -47,7 +16,7 @@ function showAllColleges(allData) {
     strong.textContent = "" + data.institucion_educativa;
     departamento.textContent = "" + data.departamento;
     municipio.textContent = "" + data.municipio;
-    strong1.textContent = " Sede: " + data.sede;
+    strong1.textContent = "Sede: " + data.sede;
     estado.textContent = " Estado: " + data.estado;
     formacion.textContent = "Formacion: " + data.formacion;
     region.textContent = " Region: " + data.region;
@@ -60,7 +29,6 @@ function showAllColleges(allData) {
     content.appendChild(estado);
     content.appendChild(formacion);
     content.appendChild(region);
-
     var img = document.createElement("img");
     img.src = "img/Leopard.jpg";
     img.style.width = "100px";
@@ -68,46 +36,27 @@ function showAllColleges(allData) {
 
     content.appendChild(img);
 
+    if (data.estado === "PENDIENTEa") {
+      var icon = {
+        url:
+          "http://www.developerdrive.com/wp-content/uploads/2013/08/ddrive.png",
+      };
+    } else {
+      var icon = {
+        url: "https://i.ibb.co/DbxtxSm/school-1.png",
+      };
+    }
+
     // aca pinta los que estan en la base de datos
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(data.latitud, data.longitud),
       map: map,
+      icon: icon,
     });
 
     marker.addListener("mouseover", function () {
       infoWind.setContent(content);
       infoWind.open(map, marker);
     });
-  });
-}
-
-function codeAddress(cdata) {
-  Array.prototype.forEach.call(cdata, function (data) {
-    var address = data.name + " " + data.address;
-    geocoder.geocode({ address: address }, function (results, status) {
-      if (status == "OK") {
-        map.setCenter(results[0].geometry.location);
-        var points = {};
-        points.id = data.id;
-        points.departamento = data.departamento;
-        points.latitud = map.getCenter().latitud();
-        points.longitud = map.getCenter().longitud();
-        console.log(points.data.departamento);
-        updateCollegeWithLatLng(points);
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
-  });
-}
-
-function updateCollegeWithLatLng(points) {
-  $.ajax({
-    url: "action.php",
-    method: "post",
-    data: points,
-    success: function (res) {
-      console.log(res);
-    },
   });
 }

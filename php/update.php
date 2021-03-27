@@ -1,7 +1,3 @@
-<?php require 'education.php';
-$edu = new education;
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -21,8 +17,8 @@ $edu = new education;
     }
 
     #data,
-    #Data {
-        display: none;
+    #allData {
+        /* display: none; */
     }
     </style>
 </head>
@@ -33,63 +29,21 @@ $edu = new education;
         <div class="banner">
             <!-- Image and text -->
             <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="../">
                     <img src="https://www.enticconfio.gov.co/sites/default/files/imagen-1.png" width="50" height="30"
                         class="d-inline-block align-top" alt="">
                     Busqueda de instituciones
                 </a>
 
-                <a class="navbar-link" href="./php/update.php">
+                <a class="navbar-link" href="#">
                     Datos
                 </a>
             </nav>
         </div>
 
         <!-- INICIA EL ROW DE LSO SELECTS -->
-        <div class="row my-3">
-
-            <div class="col-md-3">
-                <select name="departamento" id="departamento" class="form-select">
-                    <option value="">Selecciona el Departamento</option>
-                    <?php
-                    $departamentos = $edu->getDepartamentos();
-                    foreach ($departamentos as $v) {
-                        if (!isset($departamentos[$v["departamento"]])) { ?>
-                    <option value="<?php echo $v['departamento']; ?>" id="<?php echo $v['departamento']; ?>">
-                        <?php echo $v['departamento']; ?></option>
-                    <?php
-                        }
-                    } ?>
-                </select>
-            </div>
-            <!-- municipio -->
-            <div class="col-md-3" id="municipios">
-            </div>
-
-            <!-- sede -->
-            <div class="col-md-3" id="sede">
-            </div>
-
-            <div class="col-md-3">
-                <select name="estado" id="" class="form-select">
-                    <option value=""">Estado</option>
-               		<option value=" pendiente">Pendiente</option>
-                    <option value="curso">En Curso</option>
-                    <option value="finalizado">Finalizado</option>
-                </select>
-            </div>
-        </div>
-
-        <input onclick="cargar()" type="button" id="boton" class="btn btn-info btn-block" value="Buscar">
 
 
-        <div id="Data">
-        </div>
-
-
-
-        <div id="map">
-        </div>
 
 
         <div class="tabla mt-3">
@@ -106,7 +60,7 @@ $edu = new education;
                         <th scope="col">Formacion</th>
                     </tr>
                 </thead>
-                <tbody id="tablita">
+                <tbody>
 
                 </tbody>
             </table>
@@ -115,7 +69,7 @@ $edu = new education;
     </div>
 </body>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBotmvjuJo6UNDyj7-AbGxXPm-zISsHWF4&callback=loadMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5k4eIFGw2Cu3dbFgkxGvfXqxOlgQsqB4&callback=loadMap">
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -125,8 +79,8 @@ $edu = new education;
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="./js/index.js"></script>
-<script type="text/javascript" src="js/googlemap.js"></script>
 
+<script type="text/javascript" src="js/googlemap.js"></script>
+<script src="./js/index.js"></script>
 
 </html>
