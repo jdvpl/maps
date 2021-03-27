@@ -14,7 +14,7 @@ function mostrarUbicacion(ubicacion) {
 function loadMap() {
   var bogota = { lat: 4.6717166, lng: -74.0954029 };
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
+    zoom: 7,
     center: bogota,
   });
 
@@ -25,7 +25,7 @@ function loadMap() {
 
   var cdata = JSON.parse(document.getElementById("data").innerHTML);
   geocoder = new google.maps.Geocoder();
-  codeAddress(cdata);
+  // codeAddress(cdata);
 
   var allData = JSON.parse(document.getElementById("allData").innerHTML);
   showAllColleges(allData);
@@ -89,8 +89,10 @@ function codeAddress(cdata) {
         map.setCenter(results[0].geometry.location);
         var points = {};
         points.id = data.id;
+        points.departamento = data.departamento;
         points.latitud = map.getCenter().latitud();
         points.longitud = map.getCenter().longitud();
+        console.log(points.data.departamento);
         updateCollegeWithLatLng(points);
       } else {
         alert("Geocode was not successful for the following reason: " + status);

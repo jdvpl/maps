@@ -70,7 +70,10 @@
 		}
 
 		public function getAllColleges() {
-			$sql = "SELECT * FROM $this->tableName";
+			// $sql = "SELECT * FROM $this->tableName WHERE departamento =:departamento";
+			$sql = "SELECT * FROM $this->tableName  WHERE departamento = 'SANTANDER' AND municipio = 'SUCRE'";
+			// $sql = "SELECT * FROM $this->tableName  WHERE departamento = 'HUILA'";
+			// $sql = "SELECT * FROM $this->tableName";
 			$stmt = $this->conn->prepare($sql);
 			$stmt->execute();
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -92,10 +95,12 @@
 		}
 
 		public function updateCollegesWithLatLng() {
-			$sql = "UPDATE $this->tableName SET latitud = :latitud, longitud = :longitud WHERE id = :id";
+			$sql = "UPDATE $this->tableName SET latitud = :latitud, longitud = :longitud WHERE departamento = :departamento AND municipio :municipio";
 			$stmt = $this->conn->prepare($sql);
 			$stmt->bindParam(':latitud', $this->latitud);
 			$stmt->bindParam(':longitud', $this->longitud);
+			$stmt->bindParam(':departamento', $this->departamento);
+			$stmt->bindParam(':municipio', $this->municipio);
 			$stmt->bindParam(':id', $this->id);
 
 			if($stmt->execute()) {
